@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Move Stats</title>
+    <script src="http://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://tools-static.wmflabs.org/cdnjs/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="static/user-graph.js"></script>
+    <script src="static/movestats.js"></script>
+    <link href="http://tools-static.wmflabs.org/cdnjs/ajax/libs/pure/0.6.0/pure-min.css" rel="stylesheet"/>
+    <link href="http://tools-static.wmflabs.org/cdnjs/ajax/libs/pure/0.6.0/grids-responsive-min.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="/movestats/static/web.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="header">
+      <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+	<div class="pure-menu-heading">Move Stats</div>
+      </div>
+    </div>
+    <div class="graph-container pure-g">
+      <div class="tab-container pure-u-1">
+	<div class="tab tab-active pure-button pure-button-primary" id="tab-moves">Moves</div>
+	<div class="tab pure-button" id="tab-edits">Edits</div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-1-5 bordered edits">
+	<form class="pure-form pure-form-stacked">
+	  <div class="form-section">
+	    <label for="edit-usercount">User Limit</label>
+	    <input id="edit-usercount">
+	  </div>
+	  <div class="pure-g">
+	    <div class="pure-u-1">
+	      <a href="#" id="edit-refresh" class="pure-button pure-button-primary">Refresh</a>
+	    </div>
+	  </div>
+	</form>
+      </div>
+      <div class="pure-u-1 pure-u-lg-1-5 bordered moves">
+	<form class="pure-form pure-form-stacked">
+	  <div class="form-section">
+	    <label for="move-usercount">User Limit</label>
+	    <input id="move-usercount">
+	  </div>
+
+	  <div class="form-section">
+	    <label>Namespaces</label>
+	    <div class="pure-g">
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="mainspace" value="0" type="checkbox" class="ns"> Mainspace
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="talk" value="1" type="checkbox" class="ns"> Talk
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="user" value="2" type="checkbox" class="ns"> User
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="usertalk" value="3" type="checkbox" class="ns"> User Talk
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="project" value="4" type="checkbox" class="ns"> Project
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="project-talk" value="5" type="checkbox" class="ns"> Project Talk
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="file" value="6" type="checkbox" class="ns"> File
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="filetalk" value="7" type="checkbox" class="ns"> File Talk
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="mediawiki" value="8" type="checkbox" class="ns"> MediaWiki
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="mediawiki-talk" value="9" type="checkbox" class="ns"> MediaWiki Talk
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="template" value="10" type="checkbox" class="ns"> Template
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="template-talk" value="11" type="checkbox" class="ns"> Template Talk
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="help" value="12" type="checkbox" class="ns"> Help
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="help-talk" value="13" type="checkbox" class="ns"> Help Talk
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="category-talk" value="14" type="checkbox" class="ns"> Category
+	      </div>
+	      <div class="pure-u-1 pure-u-md-1-2">
+		<input id="category-talk" value="15" type="checkbox" class="ns"> Category Talk
+	      </div>
+
+	    </div>
+ 	    <div class="button-row">
+	      <div class="pure-g">
+		<div class="pure-u-1-2">
+		  <a href="#" class="pure-button button-wide" id="ns-all">All</a><br/>
+		</div>
+		<div class="pure-u-1-2">
+		  <a href="#" class="pure-button button-wide" id="ns-none">None</a><br/>
+		</div>
+	      </div>
+	    </div>
+	    <div class="button-row">
+	      <div class="pure-g">
+		<div class="pure-u-1">
+		  <a href="#" class="pure-button button-wide" id="ns-union">Or</a>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+
+	  <div class="form-section">
+	    <div class="pure-g">
+	      <div class="pure-u-1">
+		<input type="checkbox" id="multi_ns">Only users with moves in multiple namespaces</input>
+	      </div>
+	    </div>
+	  </div>
+
+	  <div class="pure-g">
+	    <div class="pure-u-1">
+	      <a href="#" id="move-refresh" class="pure-button pure-button-primary">Refresh</a>
+	    </div>
+	  </div>
+	  <div class="pure-g">
+	    <div class="pure-u-1 result-count" id="result-count"></div>
+	  </div>
+	</form>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3 bordered">
+	<div class="graph"></div>
+      </div>
+    </div>
+  </body>
+</html>

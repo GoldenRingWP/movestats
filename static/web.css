@@ -1,0 +1,60 @@
+.home-menu {
+    background-color: #2d3e50;
+    font-size: 200%;
+}
+
+.graph-container {
+    margin-top: 15vh;
+    margin-left: 10vw;
+}
+
+.tooltip {
+    position: absolute;
+    pointer-events: none;
+    background-color: #ffffff;
+    z-index: 10;
+    border: solid black thin;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.axis path {
+    fill: none;
+    stroke: #2d3e50;
+    shape-rendering: crispEdges;
+}
+
+.button-wide {
+    width: 100%;
+}
+
+.bordered {
+    padding: 0.3em;
+    border: solid thin #2d3e50;
+}
+
+.graph {
+    height: 70vh;
+}
+
+.form-section {
+    margin: 3px;
+    padding: 0;
+    border: none;
+    border-bottom: solid thin black;
+}
+
+.button-row {
+    margin: 0;
+    margin-top: 3px;
+    padding: 0;
+    border: none;
+}
+
+.line {
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+}
